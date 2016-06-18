@@ -1,0 +1,5 @@
+**/*.pyc
+venv/
+shipping/
+ship.egg-info/
+tests/
