@@ -8,7 +8,7 @@ import datetime
 from functools import wraps
 
 from os.path import dirname, abspath
-from operators import _mkdir_p, _touch_file
+from operators import _mkdir_p, _touch_file, _copy_files
 from templates import sails, md
 
 import logging
@@ -150,22 +150,15 @@ def upload():
         _mkdir_p(harbor_folder)
         os.chdir(harbor_folder)
         os.popen('git init')
+        os.chdir(root_path)
+        _copy_files(build_folder, harbor_folder)
+        os.popen('python manage.py first_upload')
 
-    os.chdir(root_path)
+    else:
+        os.chdir(root_path)
+        _copy_files(build_folder, harbor_folder)
+        os.popen('python manage.py other_upload')
 
-    for dirpath, sub_dirs, filenames in os.walk(build_folder):
-        relative = dirpath.split(build_folder)[1].lstrip(os.path.sep)
-        harbor_dir = os.path.join(harbor_folder, relative)
-
-        _mkdir_p(harbor_dir)
-
-        for filename in filenames:
-            build_file = os.path.join(dirpath, filename)
-            harbor_file = os.path.join(harbor_dir, filename)
-
-            shutil.copy(build_file, harbor_file)
-
-    os.popen('python manage.py upload')
     os.chdir(root_path)
     logger.info('deployment done!')
 

@@ -20,7 +20,7 @@ class ShipConfig(Config):
 
     # [deploy on github pages]
     GIT_URL = "https://github.com/neo1218"
-    REPO_NAME = "ship"
+    REPO_NAME = "shipdoc"
     BRANCH = "gh-pages"
     FREEZER_BASE_URL = GIT_URL+"/"+REPO_NAME
 
