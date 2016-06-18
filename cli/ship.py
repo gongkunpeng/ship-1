@@ -157,6 +157,8 @@ def upload():
         relative = dirpath.split(build_folder)[1].lstrip(os.path.sep)
         harbor_dir = os.path.join(harbor_folder, relative)
 
+        _mkdir_p(harbor_dir)
+
         for filename in filenames:
             build_file = os.path.join(dirpath, filename)
             harbor_file = os.path.join(harbor_dir, filename)
