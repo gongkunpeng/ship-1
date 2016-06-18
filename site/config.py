@@ -19,8 +19,10 @@ class ShipConfig(Config):
     BLOG_KEYWORDS = "python static generator"
 
     # [deploy on github pages]
-    FREEZER_BASE_URL = "https://neo1218.github.io/ship/"
+    GIT_URL = "https://github.com/neo1218"
+    REPO_NAME = "ship"
     BRANCH = "gh-pages"
+    FREEZER_BASE_URL = GIT_URL+"/"+REPO_NAME
 
 
 class MyConfig(Config):
