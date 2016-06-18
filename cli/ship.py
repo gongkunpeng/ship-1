@@ -30,10 +30,8 @@ def run_in_root(f):
     def decorator(*args, **kwargs):
         path = os.getcwd()
         if path.split('/')[-1] != _site_name:
-            logger.warning( '''
-                \033[31m{warning}\033[0m
-                ==> please run the command under site root folder!
-            ''')
+            logger.warning( '''\033[31m{warning}\033[0m
+                ==> please run the command under site root folder!''')
             exit(1)
         else:
             f(*args, **kwargs)
@@ -123,17 +121,21 @@ def new(file_name):
     else:
         new_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         _touch_file(file_path, md % new_time)
-        logger.info("new a markdown file \033[34m%s\033[0m" % file_path)
+        logger.info('''\033[33m{Info}\033[0m
+                    ===> new a markdown file \033[34m%s\033[0m''' % file_path)
 
 
 @click.command()
 @run_in_root
 def build():
+    # now, the problem is how 2 use frozen-flask to generate static site
+
     build_path = os.path.join(os.getcwd(), 'app/build')
     if build_path:
         os.popen('sudo rm -rf %s' % build_path)
     os.popen('python manage.py build')
-    logger.info("static your site in \033[34m%s\033[0m" % build_path)
+    logger.info('''\033[33m{Info}\033[0m
+                ===> static your site in \033[34m%s\033[0m''' % build_path)
 
 
 @click.command()
@@ -141,14 +143,29 @@ def build():
 def upload():
     current_path = os.getcwd()
     root_path = current_path
-    harbor_folder = os.path.join(current_path, '.harbor')
-    build_folder = os.path.join(current_path, 'build')
+    harbor_folder = os.path.join(root_path, '.harbor')
+    build_folder = os.path.join(root_path, 'app/build')
 
-    _mkdir_p(harbor_folder)
-    os.chdir(harbor_folder)
-    os.popen('git init')
+    if not os.path.exists(harbor_folder):
+        _mkdir_p(harbor_folder)
+        os.chdir(harbor_folder)
+        os.popen('git init')
 
     os.chdir(root_path)
+
+    for dirpath, sub_dirs, filenames in os.walk(build_folder):
+        relative = dirpath.split(build_folder)[1].lstrip(os.path.sep)
+        harbor_dir = os.path.join(harbor_folder, relative)
+
+        for filename in filenames:
+            build_file = os.path.join(dirpath, filename)
+            harbor_file = os.path.join(harbor_dir, filename)
+
+            shutil.copy(build_file, harbor_file)
+
+    os.popen('python manage.py upload')
+    os.chdir(root_path)
+    logger.info('deployment done!')
 
 
 cli.add_command(init)

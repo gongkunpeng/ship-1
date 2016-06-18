@@ -11,15 +11,30 @@ class Config(object):
     FLATPAGES_EXTENSION = '.md'
 
 
-class LConfig(Config):
+class ShipConfig(Config):
     POST_PER_PAGE = 10
     BLOG_TITLE = "L"
     BLOG_URL = "http://neo1218.github.io/l"
     BLOG_DESC = "python static site generator"
     BLOG_KEYWORDS = "python static generator"
-    GITHUB_URL = "http://neo1218.github.io"
+
+    # [deploy on github pages]
+    FREEZER_BASE_URL = "https://neo1218.github.io/ship/"
+    BRANCH = "gh-pages"
+
+
+class MyConfig(Config):
+    POST_PER_PAGE = 10
+    BLOG_TITLE = ""
+    BLOG_URL = ""
+    BLOG_DESC = ""
+    BLOG_KEYWORDS = ""
+
+    # [deploy on github pages]
+    FREEZER_BASE_URL = ""
+    BRANCH = ""
 
 
 config = {
-    'default': LConfig
+    'default': ShipConfig
 }
