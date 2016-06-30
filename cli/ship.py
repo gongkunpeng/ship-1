@@ -1,13 +1,11 @@
 # coding: utf-8
 
 import click
-import sys
 import os
 import shutil
 import datetime
 from functools import wraps
 
-from os.path import dirname, abspath
 from operators import _mkdir_p, _touch_file, _copy_files
 from templates import sails, md
 
@@ -30,7 +28,7 @@ def run_in_root(f):
     def decorator(*args, **kwargs):
         path = os.getcwd()
         if path.split('/')[-1] != _site_name:
-            logger.warning( '''\033[31m{warning}\033[0m
+            logger.warning('''\033[31m{warning}\033[0m
                 ==> please run the command under site root folder!''')
             exit(1)
         else:
@@ -74,7 +72,6 @@ def cli():
 @click.command()
 @click.argument('site_name')
 def init(site_name):
-    # os.environ['_SITE_NAME'] = site_name
     global _site_name
     _site_name = site_name
     site = os.path.join(site_path, 'site')
@@ -163,9 +160,14 @@ def upload():
     logger.info('deployment done!')
 
 
+@click.command()
+def status():
+    pass
+
+
 cli.add_command(init)
 cli.add_command(server)
 cli.add_command(build)
 cli.add_command(new)
 cli.add_command(upload)
-# cli.add_command(status)  # 查看状态, 目前共有多少篇博客, archieve, tags... theme... giturl...
+cli.add_command(status)
