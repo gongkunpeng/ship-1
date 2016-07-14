@@ -1,4 +1,13 @@
 # coding: utf-8
+"""
+    ship::cli::ship.py
+    ``````````````````
+
+    ship commandline tool
+
+    :License :: MIT
+    :Copyright @neo1218 2016
+"""
 
 import click
 import os
@@ -125,8 +134,6 @@ def new(file_name):
 @click.command()
 @run_in_root
 def build():
-    # now, the problem is how 2 use frozen-flask to generate static site
-
     build_path = os.path.join(os.getcwd(), 'app/build')
     if build_path:
         os.popen('sudo rm -rf %s' % build_path)

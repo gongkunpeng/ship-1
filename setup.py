@@ -30,6 +30,7 @@ setup(
     platforms='any',
     install_requires=[
         'click',
+        'Flask',
         'Frozen-Flask',
         'Flask-Flatpages',
         'Flask-Wtf',

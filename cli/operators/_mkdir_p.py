@@ -1,13 +1,23 @@
 # coding: utf-8
+"""
+    ship::cli::operators::_mkdir_p.py
+    `````````````````````````````````
 
+    act as mkdir function, ignore path exist
+
+    :License :: MIT
+    :Copyright @neo1218 2016
 """
-    _mkdir_p.py
-    ```````````
-"""
+
 import os, errno
 
 
 def _mkdir_p(abspath):
+    """
+    :function _mkdir_p:
+        act as mkdir function, but ignore path exist
+    :param abspath: directory abs path
+    """
     try:
         os.makedirs(abspath)
     except OSError as e:
