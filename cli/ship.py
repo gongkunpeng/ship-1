@@ -63,13 +63,13 @@ def start_init_info(path):
         warning_path_exist(path)
         exit(1)
     else:
-        logger.info('''\033[33m{Info}\033[0m
+        logger.info('''\033[33m{Info}\033[0m\n
                     ==> start init your static site [on]
                     ==> \033[32m%s\033[0m\n''' % path)
 
 
 def finish_init_info():
-    logger.info('''\033[33m{Info}\033[0m \
+    logger.info('''\033[33m{Info}\033[0m\n
                 ==> finish init your ship site''')
 
 
@@ -100,7 +100,11 @@ def init(site_name):
             dst_file = os.path.join(dst_dir, filename)
 
             shutil.copy(site_file, dst_file)
-            logger.info("\033[34m<New>\033[0m: %s" % dst_file)
+    themes_path = os.path.join(dst, 'app/themes')
+    os.chdir(themes_path)
+    os.popen('git clone https://github.com/neo1218/ship-theme-cat.git cat')
+    os.chdir(dst)
+    os.popen('ship upgrade cat')
 
     finish_init_info()
     os.chdir(dst)
@@ -165,6 +169,31 @@ def upload():
 
 
 @click.command()
+@click.argument('theme_name')
+@run_in_root
+def upgrade(theme_name):
+    root_path = os.getcwd()
+    templates_target_path = os.path.join(root_path, 'app/templates') 
+    static_target_path = os.path.join(root_path, 'app/static')
+
+    templates_path = os.path.join(root_path,
+                                  'app/themes/%s/templates' % theme_name)
+    static_path = os.path.join(root_path, 'app/themes/%s/static' % theme_name)
+
+    if os.path.isdir(templates_target_path):
+        shutil.rmtree(templates_target_path)
+    if os.path.isdir(static_target_path):
+        shutil.rmtree(static_target_path)
+    shutil.copytree(templates_path, templates_target_path)
+    shutil.copytree(static_path, static_target_path)
+
+    logger.info(''' \033[33m{info}\033[0m\n
+                ==> upgrade theme to \033[33m{%s}\033[0m
+                ''' % theme_name
+    )
+
+
+@click.command()
 def status():
     pass
 
@@ -174,4 +203,5 @@ cli.add_command(server)
 cli.add_command(build)
 cli.add_command(new)
 cli.add_command(upload)
+cli.add_command(upgrade)
 cli.add_command(status)
