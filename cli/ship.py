@@ -189,8 +189,7 @@ def upgrade(theme_name):
 
     logger.info(''' \033[33m{info}\033[0m\n
                 ==> upgrade theme to \033[33m{%s}\033[0m
-                ''' % theme_name
-    )
+                ''' % theme_name)
 
 
 @click.command()

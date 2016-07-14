@@ -20,14 +20,15 @@ When ship is stable, I will register it to pypi:)
 
 ### $ ship upload
 
+### $ ship upgrade
 
 ## ✅ API
 
 
 ## ⬅️ Todo
 + [ ] ship status
-+ [ ] a simple way to config & upgrade themes
-+ [ ] Separate theme from site
++ [x] a simple way to config & upgrade themes
++ [x] Separate theme from site
 
 ## License
 MIT, check [LICENSE] for detail.
