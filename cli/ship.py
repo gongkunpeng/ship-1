@@ -70,7 +70,7 @@ def start_init_info(path):
 
 def finish_init_info():
     logger.info('''\033[33m{Info}\033[0m \
-                ==> finish init your flask project''')
+                ==> finish init your ship site''')
 
 
 @click.group()
@@ -155,7 +155,6 @@ def upload():
         os.chdir(root_path)
         _copy_files(build_folder, harbor_folder)
         os.popen('python manage.py first_upload')
-
     else:
         os.chdir(root_path)
         _copy_files(build_folder, harbor_folder)

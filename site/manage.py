@@ -36,7 +36,7 @@ def first_upload():
         os.popen('git checkout -b %s' % git_branch)
         os.popen('git pull -u %s %s' % (git_repo_url, git_branch))
         os.popen('git add .')
-        os.popen('git commit -m "ship site update"')
+        os.popen('git commit -m "ship site update...✅ "')
         os.popen('git push -u %s %s' % (git_repo_url, git_branch))
 
 
@@ -48,7 +48,7 @@ def other_upload():
         os.chdir(harbor_folder)
         os.popen('git checkout %s' % git_branch)
         os.popen('git add .')
-        os.popen('git commit -m "ship site update"')
+        os.popen('git commit -m "ship site update...✅ "')
         os.popen('git push -u %s %s' % (git_repo_url, git_branch))
 
 

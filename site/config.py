@@ -33,8 +33,10 @@ class MyConfig(Config):
     BLOG_KEYWORDS = ""
 
     # [deploy on github pages]
-    FREEZER_BASE_URL = ""
+    GIT_URL = ""
+    REPO_NAME = ""
     BRANCH = ""
+    FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 
 config = {
