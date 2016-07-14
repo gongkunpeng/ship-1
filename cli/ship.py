@@ -135,8 +135,6 @@ def new(file_name):
 @run_in_root
 def build():
     build_path = os.path.join(os.getcwd(), 'app/build')
-    if build_path:
-        os.popen('sudo rm -rf %s' % build_path)
     os.popen('python manage.py build')
     logger.info('''\033[33m{Info}\033[0m
                 ===> static your site in \033[34m%s\033[0m''' % build_path)
