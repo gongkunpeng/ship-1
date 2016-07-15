@@ -38,7 +38,6 @@ def run_in_root(f):
     def decorator(*args, **kwargs):
         path = os.getcwd()
         _dot_site_path = os.path.join(path, '.site')
-        # if path.split('/')[-1] != os.getenv('SITENAME'):
         if not os.path.isfile(_dot_site_path):
             logger.warning('''\033[31m{warning}\033[0m
                 ==> please run the command under site root folder!''')
@@ -116,7 +115,6 @@ def init(site_name):
 @run_in_root
 def server(port):
     logger.info("%s" % sails)
-
     os.popen("python manage.py runserver --port %d" % port)
 
 

@@ -25,7 +25,7 @@ class ExampleConfig(Config):
     # [deploy on github/(git) pages]
     git_url = "https://github.com/neo1218"
     repo_name = "Test"
-    brance = "gh-pages"
+    branch = "gh-pages"
     FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 
@@ -43,7 +43,7 @@ class MyConfig(Config):
     # [deploy on github/(git) pages]
     git_url = ""
     repo_name = ""
-    brance = ""
+    branch = ""
     FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 

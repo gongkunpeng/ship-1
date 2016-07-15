@@ -18,9 +18,9 @@ sys.setdefaultencoding('utf-8')
 
 
 """Git配置"""
-git_url = app.config['GIT_URL']
-repo_name = app.config['REPO_NAME']
-git_branch = app.config['BRANCH']
+git_url = app.config['git_url']
+repo_name = app.config['repo_name']
+git_branch = app.config['branch']
 git_repo_url = app.config['FREEZER_BASE_URL']
 
 
