@@ -1,4 +1,15 @@
 # coding: utf-8
+"""
+    ship::site::__init__.py
+    ```````````````````````
+
+    init file for ship-site,
+        create global flask app;
+        initial flask extensions.
+
+    :LICENSE :: MIT
+    :Copyright @neo1218 2016
+"""
 
 from flask import Flask
 from flask_flatpages import FlatPages

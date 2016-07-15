@@ -2,6 +2,11 @@
 """
     config.py
     `````````
+
+    ship-site user config
+
+    :License :: MIT
+    :Copyright @neo1218 2016
 """
 
 
@@ -13,37 +18,47 @@ class Config(object):
 
 class ExampleConfig(Config):
     # [site setting]
-    site_name = "shipsite"
-    site_url = "https://neo1218.github.io"
-    site_desc = "a ship site"
-    site_owner = "neo1218"
+    SITE_NAME = "shipsite"
+    SITE_URL = "https://neo1218.github.io"
+    SITE_DESC = "a ship site"
+    SITE_OWNEr = "neo1218"
 
     # [article setting]
-    article_type = FLATPAGES_EXTENSION = '.md'  # default is .md
-    article_per_page = 10
+    ARTICLE_Type = FLATPAGES_EXTENSION = '.md'  # default is .md
+    ARTICLE_PER_PAGE = 10
+
+    # [owner info] 
+    GITHUB_URL = "https://github.com/neo1218"
+    WEIBO_URL = "http://www.weibo.com/5551886705/profile"
+    TWITTER_URl = "https://twitter.com/neo1218substack"
 
     # [deploy on github/(git) pages]
-    git_url = "https://github.com/neo1218"
-    repo_name = "Test"
-    branch = "gh-pages"
+    GIT_URL = "https://github.com/neo1218"
+    REPO_NAME = "Test"
+    BRANCH = "gh-pages"
     FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 
 class MyConfig(Config):
     # [site setting]
-    site_name = ""
-    site_url = ""
-    site_desc = ""
-    site_owner = ""
+    SITE_NAME = ""
+    SITE_URL = ""
+    SITE_DESC = ""
+    SITE_OWNER = ""
 
     # [article setting]
-    article_type = FLATPAGES_EXTENSION = ""
-    article_per_page = 10
+    ARTICLE_TYPE = FLATPAGES_EXTENSION = ""
+    ARTICLE_PER_PAGE = 10
+
+    # [owner info]
+    GITHUB_URL = ""
+    WEIBO_URL = ""
+    TWITTER_URl = ""
 
     # [deploy on github/(git) pages]
-    git_url = ""
-    repo_name = ""
-    branch = ""
+    GIT_URL = ""
+    REPO_NAME = ""
+    BRANCH = ""
     FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 

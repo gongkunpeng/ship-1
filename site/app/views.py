@@ -1,7 +1,12 @@
 # coding: utf-8
 """
-    views.py
-    ````````
+    ship::site::views.py
+    ````````````````````
+
+    ship-site routes API
+
+    :License :: MIT
+    :Copyright @neo1218 2016
 """
 
 from . import app
@@ -10,70 +15,61 @@ from flask import render_template, request
 from .paginate import _Pagination
 
 
-""" Views Config """
-post_per_page = _num =  app.config.get('POST_PER_PAGE')
-blog_title = app.config.get('BLOG_TITLE')
-blog_url = app.config.get('BLOG_URL')
-blog_desc = app.config.get('BLOG_DESC')
-blog_keywords = app.config.get('BLOG_KEYWORDS')
-github_url = app.config.get('GITHUB_URL')
+""" User Config """
+article_per_page = app.config.get('ARTICLE_PER_PAGE')
+user_config_dict = {
+        'ARTICLE_PER_PAGE': article_per_page,
+        'SITE_NAME': app.config.get('SITE_NAME'),
+        'SITE_URL': app.config.get('SITE_URL'),
+        'SITE_DESC': app.config.get('SITE_DESC'),
+        'SITE_OWNER': app.config.get('SITE_OWNER'),
+        'GIT_URL': app.config.get('GIT_URL'),
+        'GITHUB_URL': app.config.get('GITHUB_URL'),
+        'WEIBO_URL': app.config.get('WEIBO_URL'),
+        'TWITTER_URL': app.config.get('TWITTER_URL'), }
 """"""
 
 
 """ API """
 posts = [p for p in pages if 'date' in p.meta]
-posts_sum = len(posts)
 latests = sorted(posts, key=lambda p: p.meta['date'], reverse=True)
-tags = [tag for tag in (p.meta.get('tag') for p in latests)]
-archive = {}.fromkeys([str(p.meta.get('date'))[:-3] for p in latests]).keys()
+api_dict = {
+        'posts': posts,
+        'posts_sum': len(posts),
+        'latests': latests,
+        'tags': [p.meta.get('tag') for p in latests],
+        'archive': {}.fromkeys(
+                   [str(p.meta.get('date'))[:-3] for p in latests]).keys(), }
 """"""
 
 
 @app.route('/')
 def index():
-    """
-    index page
-    -- latests(pagination)
-    -- tags, archive, posts_sum
-    """
     page = int(request.args.get('page') or 1)
     if isinstance(latests, list):
-        _latests = _Pagination(latests, page, _num)  # paginate object
-    return render_template(
-        'index.html',
-        latests=_latests, tags=tags,
-        archive=archive, posts_sum=posts_sum,
-        blog_url=blog_url, blog_title=blog_title,
-        blog_desc=blog_desc, blog_keywords=blog_keywords,
-        github_url=github_url)
+        _latests = _Pagination(latests, page, article_per_page)
+    return render_template('index.html', **dict(user_config_dict, **api_dict))
 
 
 @app.route('/<path:path>/')
 def post(path):
     post = pages.get_or_404(path)
-    return render_template(
-        'post.html', post=post,
-        tags=tags, archive=archive)
+    return render_template('post.html', **dict(user_config_dict, **api_dict))
 
 
 @app.route('/archieve/<string:year>/')
 def archieve(year):
     posts = [p for p in pages if year in \
             str(p.meta.get('date')[-3])]
-    return render_template(
-        'archive.html', posts=posts,
-        posts_sum=posts_sum, year=year)
+    return render_template('archive.html', **dict(user_config_dict, **api_dict))
 
 
 @app.route('/tags/<string:tag>/')
 def tags(tag):
     posts = [p for p in pages if tag in p.meta.get('tags', [])]
-    return render_template('tags.html',
-        tag = tag,
-        posts = posts,
-        posts_sum = posts_sum)
+    return render_template('tags.html', **dict(user_config_dict, **api_dict))
 
 
-# @app.route('/about')
-# def about():
-#     pass
+@app.route('/about/')
+def about():
+    return render_template('about.html', **dict(user_config_dict, **api_dict))
