@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 import cli
 
 # version
-version = 0.01
+version = 0.11
 
 
 # entry_points
@@ -16,7 +16,7 @@ entry_points = {
 
 
 setup(
-    name='ship',
+    name='ship-cli',
     version=version,
     packages=find_packages(),
     url='https://github.com/neo1218/ship',
