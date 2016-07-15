@@ -9,6 +9,7 @@
     :Copyright @neo1218 2016
 """
 
+import platform
 import click
 import os
 import shutil
@@ -25,7 +26,7 @@ logger.setLevel(DEBUG)
 logger.addHandler(StreamHandler())
 
 
-_site_name = 'site'
+_platform = platform.platform().split('-')[0]
 site_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
@@ -36,7 +37,9 @@ def run_in_root(f):
     @wraps(f)
     def decorator(*args, **kwargs):
         path = os.getcwd()
-        if path.split('/')[-1] != _site_name:
+        _dot_site_path = os.path.join(path, '.site')
+        # if path.split('/')[-1] != os.getenv('SITENAME'):
+        if not os.path.isfile(_dot_site_path):
             logger.warning('''\033[31m{warning}\033[0m
                 ==> please run the command under site root folder!''')
             exit(1)
@@ -81,11 +84,9 @@ def cli():
 @click.command()
 @click.argument('site_name')
 def init(site_name):
-    global _site_name
-    _site_name = site_name
     site = os.path.join(site_path, 'site')
-    dst = os.path.join(os.getcwd(), _site_name)
-
+    dst = os.path.join(os.getcwd(), site_name)
+    
     start_init_info(dst)
     _mkdir_p(dst)
 
@@ -101,9 +102,8 @@ def init(site_name):
 
             shutil.copy(site_file, dst_file)
     themes_path = os.path.join(dst, 'app/themes')
-    os.chdir(themes_path)
-    os.popen('git clone https://github.com/neo1218/ship-theme-cat.git cat')
     os.chdir(dst)
+    os.popen('git clone https://github.com/neo1218/ship-theme-cat.git app/themes/cat')
     os.popen('ship upgrade cat')
 
     finish_init_info()
@@ -187,7 +187,7 @@ def upgrade(theme_name):
     shutil.copytree(templates_path, templates_target_path)
     shutil.copytree(static_path, static_target_path)
 
-    logger.info(''' \033[33m{info}\033[0m\n
+    logger.info('''\033[33m{info}\033[0m\n
                 ==> upgrade theme to \033[33m{%s}\033[0m
                 ''' % theme_name)
 
