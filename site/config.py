@@ -11,34 +11,42 @@ class Config(object):
     FLATPAGES_EXTENSION = '.md'
 
 
-class ShipConfig(Config):
-    POST_PER_PAGE = 10
-    BLOG_TITLE = "L"
-    BLOG_URL = "http://neo1218.github.io/l"
-    BLOG_DESC = "python static site generator"
-    BLOG_KEYWORDS = "python static generator"
+class ExampleConfig(Config):
+    # [site setting]
+    site_name = "shipsite"
+    site_url = "https://neo1218.github.io"
+    site_desc = "a ship site"
+    site_owner = "neo1218"
 
-    # [deploy on github pages]
-    GIT_URL = "https://github.com/neo1218"
-    REPO_NAME = "shipdoc"
-    BRANCH = "gh-pages"
-    FREEZER_BASE_URL = GIT_URL+"/"+REPO_NAME
+    # [article setting]
+    article_type = FLATPAGES_EXTENSION = '.md'  # default is .md
+    article_per_page = 10
+
+    # [deploy on github/(git) pages]
+    git_url = "https://github.com/neo1218"
+    repo_name = "Test"
+    brance = "gh-pages"
+    FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 
 class MyConfig(Config):
-    POST_PER_PAGE = 10
-    BLOG_TITLE = ""
-    BLOG_URL = ""
-    BLOG_DESC = ""
-    BLOG_KEYWORDS = ""
+    # [site setting]
+    site_name = ""
+    site_url = ""
+    site_desc = ""
+    site_owner = ""
 
-    # [deploy on github pages]
-    GIT_URL = ""
-    REPO_NAME = ""
-    BRANCH = ""
+    # [article setting]
+    article_type = FLATPAGES_EXTENSION = ""
+    article_per_page = 10
+
+    # [deploy on github/(git) pages]
+    git_url = ""
+    repo_name = ""
+    brance = ""
     FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
 
 
 config = {
-    'default': ShipConfig
+    'default': ExampleConfig
 }
