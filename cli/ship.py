@@ -115,7 +115,7 @@ def init(site_name):
 @run_in_root
 def server(port):
     logger.info("%s" % sails)
-    os.popen("python manage.py runserver --port %d" % port)
+    os.popen("python2 manage.py runserver --port %d" % port)
 
 
 @click.command()
