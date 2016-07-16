@@ -21,7 +21,7 @@ class ExampleConfig(Config):
     SITE_NAME = "shipsite"
     SITE_URL = "https://neo1218.github.io"
     SITE_DESC = "a ship site"
-    SITE_OWNEr = "neo1218"
+    SITE_OWNER = "neo1218"
 
     # [article setting]
     ARTICLE_Type = FLATPAGES_EXTENSION = '.md'  # default is .md
