@@ -135,8 +135,6 @@ static/ --&gt; css/
 </pre></div>
 
 
-<p>在templates中使用<code>/static/css/main.css</code>就可以获取static下的相应资源,
-十分方便.</p>
 <h2>路由</h2>
 <p>ship默认定义了一些路由, 通过访问这些路由, 便可加载相应的html文件. 注意提供站内链接时,
 需要使用路由构造语法<code>url_for</code>, </p>
@@ -164,6 +162,7 @@ img
 /archieve/&lt;string:year&gt;/ | archive.html | url_for(&#39;archieve&#39;, year=&lt;string:year&gt;) | 归档页
 /tags/&lt;string:tag&gt;/      | tags.html    | url_for(&#39;tags&#39;, tag=&lt;string:tag&gt;)       | 标签页
 /about/                  | about.html   | url_for(&#39;about&#39;)                        | 关于页
+/static/&lt;filename&gt;/      | None         | url_for(&#39;static&#39;, filename=filename)    | 静态资源
 </pre></div>
 
 
@@ -193,7 +192,30 @@ img
 </pre></div>
 
 
-<p>在Jinja中使用<code>{{ ApiName }}</code>即可使用.</p>
+<p>注意, 在不同的路由中, 这些api是不同的: <br/>
+<strong><code>/</code></strong>:</p>
+<div class="codehilite"><pre>如果你开启了分页(ARTICLE_PER_PAGE != 0), 那么```latests```列表就是一个分页对象
+具有prev_num和next_num属性(具体见下面的分页)
+</pre></div>
+
+
+<p><strong><code>/&lt;path:path&gt;/</code></strong></p>
+<div class="codehilite"><pre>对于提供了文章具体路径的路由, 你可以直接用```post```表示该路径对应的文章
+</pre></div>
+
+
+<p><strong><code>/archieve/&lt;string:year&gt;/</code></strong></p>
+<div class="codehilite"><pre>归档页中的```posts```是根据year归档后的文章列表
+</pre></div>
+
+
+<p><strong><code>/tags/&lt;string:tag&gt;/</code></strong></p>
+<div class="codehilite"><pre>标签页中的```posts```则是该标签tag的所有文章列表
+</pre></div>
+
+
+<p><br/>
+在Jinja中使用<code>{{ ApiName }}</code>语法即可使用这些API.</p>
 <h3>文章相关</h3>
 <h4><strong>获取文章基本信息</strong></h4>
 <p>你可以在Jinja中遍历文章列表, 获取单个文章:</p>
