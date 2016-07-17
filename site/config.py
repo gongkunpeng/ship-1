@@ -33,10 +33,9 @@ class ExampleConfig(Config):
     TWITTER_URl = "https://twitter.com/neo1218substack"
 
     # [deploy on github/(git) pages]
-    GIT_URL = "https://github.com/neo1218"
-    REPO_NAME = "Test"
+    GIT_URL = "https://github.com/neo1218/ship"
     BRANCH = "gh-pages"
-    FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
+    FREEZER_BASE_URL = SITE_URL
 
 
 class MyConfig(Config):
@@ -47,7 +46,7 @@ class MyConfig(Config):
     SITE_OWNER = ""
 
     # [article setting]
-    ARTICLE_TYPE = FLATPAGES_EXTENSION = ""
+    ARTICLE_TYPE = FLATPAGES_EXTENSION = ".md"
     ARTICLE_PER_PAGE = 10
 
     # [owner info]
@@ -57,9 +56,8 @@ class MyConfig(Config):
 
     # [deploy on github/(git) pages]
     GIT_URL = ""
-    REPO_NAME = ""
     BRANCH = ""
-    FREEZER_BASE_URL = GIT_URL + "/" + REPO_NAME
+    FREEZER_BASE_URL = SITE_URL
 
 
 config = {

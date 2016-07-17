@@ -45,10 +45,11 @@ api_dict = {
 
 @app.route('/')
 def index():
-    if ARTICLE_PER_PAGE != 0:
+    if article_per_page != 0:
         page = int(request.args.get('page') or 1)
         if isinstance(latests, list):
             _latests = _Pagination(latests, page, article_per_page)
+            api_dict['latests'] = _latests
         return render_template('index.html', **dict(user_config_dict, **api_dict))
     else:
         return render_template('index.html', **dict(user_config_dict, **api_dict))

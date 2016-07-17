@@ -19,9 +19,7 @@ sys.setdefaultencoding('utf-8')
 
 """Git配置"""
 git_url = app.config['GIT_URL']
-repo_name = app.config['REPO_NAME']
 git_branch = app.config['BRANCH']
-git_repo_url = app.config['FREEZER_BASE_URL']
 
 
 manager = Manager(app)
@@ -34,10 +32,10 @@ def first_upload():
         harbor_folder = os.path.join(os.getcwd(), '.harbor')
         os.chdir(harbor_folder)
         os.popen('git checkout -b %s' % git_branch)
-        os.popen('git pull -u %s %s' % (git_repo_url, git_branch))
+        os.popen('git pull -u %s %s' % (git_url, git_branch))
         os.popen('git add .')
         os.popen('git commit -m "ship site update...✅ "')
-        os.popen('git push -u %s %s' % (git_repo_url, git_branch))
+        os.popen('git push -u %s %s' % (git_url, git_branch))
 
 
 def other_upload():
@@ -49,7 +47,7 @@ def other_upload():
         os.popen('git checkout %s' % git_branch)
         os.popen('git add .')
         os.popen('git commit -m "ship site update...✅ "')
-        os.popen('git push -u %s %s' % (git_repo_url, git_branch))
+        os.popen('git push -u %s %s' % (git_url, git_branch))
 
 
 if __name__ == '__main__':
