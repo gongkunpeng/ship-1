@@ -1,5 +1,8 @@
 # Ship
-📝  a python static site generator, shipping on [Frozen-Flask](http://pythonhosted.org/Frozen-Flask/)
+a python static site generator, shipping on [Frozen-Flask](http://pythonhosted.org/Frozen-Flask/)
+
+## 📝 Document
+[ship document](https://neo1218.github.io/ship)
 
 ## ⬇️ Install
 Currently, you can get ship from source
@@ -21,9 +24,6 @@ When ship is stable, I will register it to pypi:)
 ### $ ship upload
 
 ### $ ship upgrade
-
-## ✅ API
-
 
 ## ⬅️ Todo
 + [ ] ship status
