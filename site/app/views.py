@@ -58,6 +58,7 @@ def index():
 @app.route('/<path:path>/')
 def post(path):
     post = pages.get_or_404(path)
+    api_dict['post'] = post
     return render_template('post.html', **dict(user_config_dict, **api_dict))
 
 
@@ -65,12 +66,14 @@ def post(path):
 def archieve(year):
     posts = [p for p in pages if year in \
             str(p.meta.get('date')[-3])]
+    api_dict['posts'] = posts
     return render_template('archive.html', **dict(user_config_dict, **api_dict))
 
 
 @app.route('/tags/<string:tag>/')
 def tags(tag):
     posts = [p for p in pages if tag in p.meta.get('tags', [])]
+    api_dict['posts'] = posts
     return render_template('tags.html', **dict(user_config_dict, **api_dict))
 
 
