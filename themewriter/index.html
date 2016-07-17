@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        <title>
+
+            Ship: python static site generator
+
+        </title>
+
+        <meta name="description">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Ship">
+        <meta property="og:url" content="http://denjones.github.io/index.html">
+        <meta property="og:site_name" content="Ship">
+        <meta property="og:description">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Ship">
+        <meta name="twitter:description">
+
+
+        <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
+
+
+
+        <link rel="icon" href="/favicon.png">
+
+
+        <link rel="stylesheet" href="/static/css/perfect-scrollbar.min.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/main.css" type="text/css">
+
+
+    </head>
+    <body class="monochrome">
+        <div class="mobile-header">
+            <button class="sidebar-toggle" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="title" href="/hexo-theme-chan/">Ship: python static site generator</a>
+        </div>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <div class="header">
+                    <h1 class="title"><a href="/hexo-theme-chan/">python static site generator&nbsp&nbsp&nbsp&nbsp Ship</a></h1>
+
+                    <div class="info">
+                        <div class="content">
+                            <div class="author">neo1218</div>
+                        </div>
+
+                        <div class="avatar">
+                            <a href="/about"><img src="/static/img/lamu2.png"></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="body">
+                    <ul class="nav">
+                        <li>
+                            <a href=/neo1218/Test/ title="ReadMe">ReadMe</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/install/ title="Install">Install</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav">
+
+                        <li>
+                            <a href=/neo1218/Test/userguide/ title="User Guide">User Guide</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/themewriter/ title="Theme Writer">Theme Writer</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/developer/ title="Ship Developer">Ship Developer</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/api/ title="API">API</a>
+                            <a href=/neo1218/Test/about/ title="about">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div style="max-width: 1000px">
+        <a href="https://github.com/neo1218/ship"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+                    <div class="post-list">
+                        <div class="post-list-item article">
+                            <h3 class="article-header">
+                                
+    编写ship主题        
+
+                            </h3>
+
+                            <div class="article-info">
+                                <span class="article-date">
+                                </span>
+                            </div>
+                            <div class="article-entry">
+                                <p>
+    <h1>编写Ship主题</h1>
+<h2>Jinja2模版</h2>
+<p>Ship主题使用Jinja2模版编写. Jinja2是一个简洁优雅的前端模版,</p>
+<div class="codehilite"><pre><span class="nt">&lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">user</span> <span class="k">in</span> <span class="nv">users</span> <span class="cp">%}</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">user.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+
+
+<p>更多关于jinja2, 参见<a href="http://jinja.pocoo.org/docs/dev/">Jinja2文档</a>.</p>
+<h2>ship主题目录结构</h2>
+<p>ship主题的目录结构分为2大块: <strong>templates</strong> 和 <strong>static</strong>,
+templates存储html文件(jinja2模版), static则包含css, img, js:</p>
+<div class="codehilite"><pre>templates/ --&gt; index.html
+static/ --&gt; css/
+        --&gt; img/
+        --&gt; js/
+</pre></div>
+
+
+<p>在templates中使用<code>/static/css/main.css</code>就可以获取static下的相应资源,
+十分方便.</p>
+<h2>路由</h2>
+<p>ship默认定义了一些路由, 通过访问这些路由, 便可加载相应的html文件. 注意提供站内链接时,
+需要使用路由构造语法<code>url_for</code>, </p>
+<div class="codehilite"><pre><span class="x">&lt;!-- 构造指向首页的路由 --&gt;</span>
+<span class="x">&lt;a href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;index&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> /a&gt;</span>
+</pre></div>
+
+
+<p>这样ship build的时候才可以顺藤摸瓜, 进行全站静态化.<br/>
+注: <code>&lt;type:param&gt;</code> <br/></p>
+<div class="codehilite"><pre>route                    | templates    | url_for                                 | desc
+-------------------------|--------------|-----------------------------------------|-------------
+/                        | index.html   | url_for(&#39;index&#39;)                        | 首页
+/&lt;path:path&gt;/            | post.html    | url_for(&#39;post&#39;, path=post.path)         | 每个文章页面
+/archieve/&lt;string:year&gt;/ | archive.html | url_for(&#39;archieve&#39;, year=&lt;string:year&gt;) | 归档页
+/tags/&lt;string:tag&gt;/      | tags.html    | url_for(&#39;tags&#39;, tag=&lt;string:tag&gt;)       | 标签页
+/about/                  | about.html   | url_for(&#39;about&#39;)                        | 关于页
+</pre></div>
+
+
+<h2>数据获取</h2>
+<h3>用户配置</h3>
+<p>ship通过<code>user_config_dict</code>字典使每个路由对应的页面都可以获取用户配置,
+可以获取的配置项如下:</p>
+<div class="codehilite"><pre>&#39;ARTICLE_PER_PAGE&#39;: 平均每页文章数
+&#39;SITE_NAME&#39;: 站点名称
+&#39;SITE_URL&#39;: 站点url
+&#39;SITE_DESC&#39;: 站点描述
+&#39;SITE_OWNER&#39;: 站点作者
+&#39;GITHUB_URL&#39;: github
+&#39;WEIBO_URL&#39;: 微博
+&#39;TWITTER_URL&#39;: twitter
+</pre></div>
+
+
+<p>在Jinja中使用<code>{{ ConfigName }}</code>即可使用.</p>
+<h3>常用API</h3>
+<p>ship通过<code>api_dict</code>字典提供了一些API, 如下:</p>
+<div class="codehilite"><pre>&#39;posts&#39;: 所有pages下文章列表
+&#39;posts_sum&#39;: 文章的总数目
+&#39;latests&#39;: 所有文章列表按最近生成时间排序
+&#39;tags&#39;: 所有标签列表
+&#39;archive&#39;: 所有归档列表
+</pre></div>
+
+
+<p>在Jinja中使用<code>{{ ApiName }}</code>即可使用.</p>
+<h3>文章相关</h3>
+<h4><strong>获取文章基本信息</strong></h4>
+<p>你可以在Jinja中遍历文章列表, 获取单个文章:</p>
+<div class="codehilite"><pre>{% for post in latests %}
+{% endfor %}
+</pre></div>
+
+
+<p>文章的信息存储在文章的meta属性中:</p>
+<div class="codehilite"><pre><span class="cp">{%</span> <span class="k">for</span> <span class="nv">post</span> <span class="k">in</span> <span class="nv">latests</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    标题: </span><span class="cp">{{</span> <span class="nv">p.meta</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">    日期: </span><span class="cp">{{</span> <span class="nv">p.meta</span><span class="o">[</span><span class="s1">&#39;date&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">    标签列表: </span><span class="cp">{{</span> <span class="nv">p.meta</span><span class="o">[</span><span class="s1">&#39;tags&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+
+
+<p><code>{{ p.html | safe }}</code> 可以自动生成文章的html格式, 用于页面渲染.</p>
+<h4><strong>分页</strong></h4>
+<p>latests列表有<code>prev_num</code>和<code>next_num</code>属性, 可以使用如下方法进行分页</p>
+<div class="codehilite"><pre><span class="cp">{%</span> <span class="k">if</span> <span class="nv">latests.next_num</span> <span class="cp">%}</span>
+    <span class="c">&lt;!-- 如果还有下一页 --&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;index&#39;</span><span class="o">,</span> <span class="nv">page</span><span class="o">=</span><span class="nv">latests.next_num</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span>
+        <span class="s">&lt;!--</span> <span class="err">icons</span> <span class="err">--</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">if</span> <span class="nv">latests.prev_num</span> <span class="cp">%}</span>
+    <span class="c">&lt;!-- 如果还有上一页 --&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;index&#39;</span><span class="o">,</span> <span class="nv">page</span><span class="o">=</span><span class="nv">latests.prev_num</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span>
+        <span class="s">&lt;!--</span> <span class="err">icons</span> <span class="err">--</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>每页的页数通过ARTICLE_PER_PAGE设置, 如果ARTICLE_PER_PAGE=0, 表示禁止分页.</p>
+</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-footer">
+
+                        © 2016 Ship - Powered by <a href="https://github.com/neo1218/ship" target="_blank">Ship</a> - Author <a href="https://github.com/neo1218" target="_blank">neo1218</a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="/static/css/photoswipe.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/default-skin.css" type="text/css">
+
+        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+            <!-- Background of PhotoSwipe.
+                It's a separate element as animating opacity is faster than rgba(). -->
+                <div class="pswp__bg"></div>
+
+                <!-- Slides wrapper with overflow:hidden. -->
+                <div class="pswp__scroll-wrap">
+
+                    <!-- Container that holds slides.
+                        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                        Don't modify these 3 pswp__item elements, data is added later on. -->
+                        <div class="pswp__container">
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                        </div>
+
+                        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                        <div class="pswp__ui pswp__ui--hidden">
+
+                            <div class="pswp__top-bar">
+
+                                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                                <div class="pswp__counter"></div>
+
+                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                                <!-- element will get class pswp__preloader--active when preloader is running -->
+                                <div class="pswp__preloader">
+                                    <div class="pswp__preloader__icn">
+                                        <div class="pswp__preloader__cut">
+                                            <div class="pswp__preloader__donut"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                <div class="pswp__share-tooltip"></div>
+                            </div>
+
+                            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+                            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+                            <div class="pswp__caption">
+                                <div class="pswp__caption__center"></div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+
+        <script src="/static/js/photoswipe.js" type="text/javascript"></script>
+        <script src="/static/js/photoswipe-ui-default.js" type="text/javascript"></script>
+
+
+        <script src="/static/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+        <script src="/static/js/main.js" type="text/javascript"></script>
+
+    </body>
+</html>

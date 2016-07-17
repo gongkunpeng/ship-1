@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        <title>
+
+            Ship: python static site generator
+
+        </title>
+
+        <meta name="description">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Ship">
+        <meta property="og:url" content="http://denjones.github.io/index.html">
+        <meta property="og:site_name" content="Ship">
+        <meta property="og:description">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Ship">
+        <meta name="twitter:description">
+
+
+        <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
+
+
+
+        <link rel="icon" href="/favicon.png">
+
+
+        <link rel="stylesheet" href="/static/css/perfect-scrollbar.min.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/main.css" type="text/css">
+
+
+    </head>
+    <body class="monochrome">
+        <div class="mobile-header">
+            <button class="sidebar-toggle" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="title" href="/hexo-theme-chan/">Ship: python static site generator</a>
+        </div>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <div class="header">
+                    <h1 class="title"><a href="/hexo-theme-chan/">python static site generator&nbsp&nbsp&nbsp&nbsp Ship</a></h1>
+
+                    <div class="info">
+                        <div class="content">
+                            <div class="author">neo1218</div>
+                        </div>
+
+                        <div class="avatar">
+                            <a href="/about"><img src="/static/img/lamu2.png"></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="body">
+                    <ul class="nav">
+                        <li>
+                            <a href=/neo1218/Test/ title="ReadMe">ReadMe</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/install/ title="Install">Install</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav">
+
+                        <li>
+                            <a href=/neo1218/Test/userguide/ title="User Guide">User Guide</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/themewriter/ title="Theme Writer">Theme Writer</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/developer/ title="Ship Developer">Ship Developer</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/api/ title="API">API</a>
+                            <a href=/neo1218/Test/about/ title="about">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div style="max-width: 1000px">
+        <a href="https://github.com/neo1218/ship"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+                    <div class="post-list">
+                        <div class="post-list-item article">
+                            <h3 class="article-header">
+                                
+    使用Ship;)        
+
+                            </h3>
+
+                            <div class="article-info">
+                                <span class="article-date">
+                                </span>
+                            </div>
+                            <div class="article-entry">
+                                <p>
+    <h1>使用Ship, 快上船!</h1>
+<h2>ship init <site></h2>
+<p>使用<code>ship init sitename</code>创建一个ship站点.<br/>
+ship会在当前目录下创建一个名为sitename的目录, 这个目录是ship的工作目录,
+然后从github上clone主题, 默认主题是<a href="https://github.com/neo1218/ship-theme-cat">ship-theme-cat</a>.
+最后, 启动dev server, 你便可以访问http://127.0.0.1:5050, 看到可爱的site啦. <br/></p>
+<h2>配置ship站点</h2>
+<p>ship站点的配置文件在<code>{site}/config.py</code>; 分为3类配置: ship基础配置Config,
+示例配置ExampleConfig和属于用户的配置MyConfig; 
+配置项详解: <br/>
+<strong>Config类</strong> <br/></p>
+<ol>
+<li>DEBUG=True: 默认开启dev server的调试功能, 开启后可显示详细报错信息</li>
+<li>FLATPAGES_AUTO_RELOAD = DEBUG: 自动reload pages下的文件, 方便本地预览</li>
+<li>FLATPAGES_EXTENSION = '.md': pages下存储文件的后缀名, 默认是markdown文件</li>
+</ol>
+<p><br/>
+<strong>ExampleConfig类</strong><br/></p>
+<ol>
+<li>[site setting]: ship站点相关配置<ul>
+<li>SITE_NAME = "shipsite": 站点名称</li>
+<li>SITE_URL = "https://neo1218.github.io": 站点网址</li>
+<li>SITE_DESC = "a ship site": 站点描述</li>
+<li>SITE_OWNER = "neo1218": 站点作者</li>
+</ul>
+</li>
+<li>[article setting]: pages文章配置<ul>
+<li>ARTICLE_PER_PAGE = 10: 分页, 值为0表示禁止分页</li>
+</ul>
+</li>
+<li>[owner info]: 站点作者信息<ul>
+<li>GITHUB_URL = "https://github.com/neo1218": github</li>
+<li>WEIBO_URL = "http://www.weibo.com/5551886705/profile": 微博</li>
+<li>TWITTER_URl = "https://twitter.com/neo1218substack": Twitter</li>
+</ul>
+</li>
+<li>[deploy on github/(git) pages]: 静态站点git部署配置<ul>
+<li>GIT_URL = "https://github.com/neo1218": git用户url</li>
+<li>REPO_NAME = "Test": git仓库名称</li>
+<li>BRANCH = "gh-pages": 部署的git分支</li>
+</ul>
+</li>
+</ol>
+<h2>ship new <filename></h2>
+<p>配置好FLATPAGES_EXTENSION后就可以使用<code>ship new</code>生成相应后缀名的文件, 比如</p>
+<div class="codehilite"><pre><span class="p">$</span><span class="nv">ship</span><span class="x"> new test</span>
+</pre></div>
+
+
+<p>会在{site}/app/pages 下生成test.md文件, ship new会生成以下字段</p>
+<div class="codehilite"><pre>title: 标题
+date: year-mm-dd h:m:s (自动生成)
+tags: [&#39;标签1&#39;, &#39;标签2&#39;]
+</pre></div>
+
+
+<p>现在你可以放开脑洞, 编写你的文章了!</p>
+<h2>ship build</h2>
+<p>ship的核心是提供一个静态化工具, 使用<code>ship
+build</code>可以静态化你的本地站点{site}到<code>{site}/app/build</code>目录下.
+你可以将build目录部署到服务器上, 实现<code>无数据库</code>存储.</p>
+<h2>ship upload</h2>
+<p>ship提供了<code>ship upload</code>命令, 方便使用者进行git化部署.
+首先你需要配置config文件中的<code>[deploy on github/(git) pages]</code>, 然后运行<code>git
+upload</code>, 这样你的静态化目录build中的内容就部署到了git pages上.
+本地仓库则位于<code>{site}/.harbor</code>. 最好不要直接在.harbor中进行git操作,
+避免造成git冲突, 导致ship upload出错.</p>
+<h2>ship upgrade <themename></h2>
+<p><code>ship upgrade</code>命令帮助你快速的切换主题,
+你只要将相应的主题clone到<code>{site}/app/themes/</code>目录下, 然后运行<code>ship upgrade
+&lt;themename&gt;</code>即可, 例如:</p>
+<div class="codehilite"><pre>$ <span class="nb">cd</span> <span class="o">{</span>site<span class="o">}</span>
+$ git clone https://github.com/neo1218/ship-theme-cat app/themes/cat
+$ ship upgrade cat
+</pre></div>
+
+
+<p>就可以使用ship-theme-cat主题! <br/>
+如果你希望编写ship主题: 详见: Theme Writer:). <br/></p>
+<h2>ship server</h2>
+<p>启动开发服务器, 进行本地预览.</p>
+<h2>ship status</h2>
+</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-footer">
+
+                        © 2016 Ship - Powered by <a href="https://github.com/neo1218/ship" target="_blank">Ship</a> - Author <a href="https://github.com/neo1218" target="_blank">neo1218</a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="/static/css/photoswipe.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/default-skin.css" type="text/css">
+
+        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+            <!-- Background of PhotoSwipe.
+                It's a separate element as animating opacity is faster than rgba(). -->
+                <div class="pswp__bg"></div>
+
+                <!-- Slides wrapper with overflow:hidden. -->
+                <div class="pswp__scroll-wrap">
+
+                    <!-- Container that holds slides.
+                        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                        Don't modify these 3 pswp__item elements, data is added later on. -->
+                        <div class="pswp__container">
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                        </div>
+
+                        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                        <div class="pswp__ui pswp__ui--hidden">
+
+                            <div class="pswp__top-bar">
+
+                                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                                <div class="pswp__counter"></div>
+
+                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                                <!-- element will get class pswp__preloader--active when preloader is running -->
+                                <div class="pswp__preloader">
+                                    <div class="pswp__preloader__icn">
+                                        <div class="pswp__preloader__cut">
+                                            <div class="pswp__preloader__donut"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                <div class="pswp__share-tooltip"></div>
+                            </div>
+
+                            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+                            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+                            <div class="pswp__caption">
+                                <div class="pswp__caption__center"></div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+
+        <script src="/static/js/photoswipe.js" type="text/javascript"></script>
+        <script src="/static/js/photoswipe-ui-default.js" type="text/javascript"></script>
+
+
+        <script src="/static/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+        <script src="/static/js/main.js" type="text/javascript"></script>
+
+    </body>
+</html>

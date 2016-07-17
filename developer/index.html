@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        <title>
+
+            Ship: python static site generator
+
+        </title>
+
+        <meta name="description">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Ship">
+        <meta property="og:url" content="http://denjones.github.io/index.html">
+        <meta property="og:site_name" content="Ship">
+        <meta property="og:description">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Ship">
+        <meta name="twitter:description">
+
+
+        <link rel="alternative" href="/atom.xml" title="" type="application/atom+xml">
+
+
+
+        <link rel="icon" href="/favicon.png">
+
+
+        <link rel="stylesheet" href="/static/css/perfect-scrollbar.min.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/main.css" type="text/css">
+
+
+    </head>
+    <body class="monochrome">
+        <div class="mobile-header">
+            <button class="sidebar-toggle" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="title" href="/hexo-theme-chan/">Ship: python static site generator</a>
+        </div>
+
+        <div class="main-container">
+            <div class="sidebar">
+                <div class="header">
+                    <h1 class="title"><a href="/hexo-theme-chan/">python static site generator&nbsp&nbsp&nbsp&nbsp Ship</a></h1>
+
+                    <div class="info">
+                        <div class="content">
+                            <div class="author">neo1218</div>
+                        </div>
+
+                        <div class="avatar">
+                            <a href="/about"><img src="/static/img/lamu2.png"></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="body">
+                    <ul class="nav">
+                        <li>
+                            <a href=/neo1218/Test/ title="ReadMe">ReadMe</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/install/ title="Install">Install</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="nav">
+
+                        <li>
+                            <a href=/neo1218/Test/userguide/ title="User Guide">User Guide</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/themewriter/ title="Theme Writer">Theme Writer</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/developer/ title="Ship Developer">Ship Developer</a>
+                        </li>
+
+                        <li>
+                            <a href=/neo1218/Test/api/ title="API">API</a>
+                            <a href=/neo1218/Test/about/ title="about">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div style="max-width: 1000px">
+        <a href="https://github.com/neo1218/ship"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+                    <div class="post-list">
+                        <div class="post-list-item article">
+                            <h3 class="article-header">
+                                
+    ship developer        
+
+                            </h3>
+
+                            <div class="article-info">
+                                <span class="article-date">
+                                </span>
+                            </div>
+                            <div class="article-entry">
+                                <p>
+    <h1>开发ship</h1>
+<p>如果你希望了解ship是如何运行的, 这篇文档会有一个概括的总结.</p>
+<h2>ship架构</h2>
+<p>ship 是一个命令行工具, ship的主要架构分为2大块: <strong>cli</strong>, <strong>site</strong>,
+ship-site是生成本地site的一个原型, 本质上是一个简单的<a href="http://flask.pocoo.org">flask</a> site,
+使用<a href="https://pythonhosted.org/Flask-FlatPages/">flask-flatpages</a>管理pages下的页面, 使用<a href="http://pythonhosted.org/Frozen-Flask/">frozen-flask</a>进行静态化;
+ship-cli则是使用<a href="http://click.pocoo.org">click</a>开发的一个命令行工具,
+在ship中相当于controller, 在上层对site进行扩展操作, 涉及site
+配置获取则与site的manage.py进行交互. <br/></p>
+<h2>ship-cli</h2>
+<p><strong>ship-cli的结构</strong></p>
+<div class="codehilite"><pre>@click.group
+def cli():
+    pass
+
+cli.add_command(init)
+cli.add_command(server)
+cli.add_command(build)
+cli.add_command(new)
+cli.add_command(upload)
+cli.add_command(upgrade)
+cli.add_command(status)
+</pre></div>
+
+
+<p><strong>ship init</strong> <br/>
+ship init初始化site, 涉及python os模块, 当调用ship init命令时, site的路径是:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">site_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">site_path</span><span class="p">,</span> <span class="s1">&#39;site&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>而生成site的当前路径是<code>os.getcwd()</code>, 所以本地site的路径是</p>
+<div class="codehilite"><pre>local_site = os.path.join(os.getcwd(), sitename)
+</pre></div>
+
+
+<p>ship init首先做的就是创建这个local_site,
+在创建之前会先判断os.path.isdir(local_site)该路径是否存在, 并给予警告. <br/>
+接下来, 就要初始化local_site, 将ship-site中的内容"拷贝"到local_site中,
+拷贝时需要将目录结构和所有文件一起拷贝,
+使用<code>os.walk</code>遍历目录、使用<code>shutil</code>进行拷贝是一个比较好的做法.</p>
+<div class="codehilite"><pre>for site_dir, sub_dirs, filenames in os.walk(site):
+    relative = site_dir.split(site)[1].lstrip(os.path.sep)
+    dst_dir = os.path.join(dst, relative)
+
+    _mkdir_p(dst_dir)
+
+    for filename in filenames:
+        site_file = os.path.join(site_dir, filename)
+        dst_file = os.path.join(dst_dir, filename)
+
+        shutil.copy(site_file, dst_file)
+</pre></div>
+
+
+<p>初始化后, 就会进行主题集成, 启动dev server. <br/></p>
+<h2>配置获取</h2>
+<p>配置是在用户本地定义的, 单纯使用ship-cli是没有办法获取用户配置. 这时,
+ship-cli更像一个开关, 使用<code>os.popen()</code>将执行权转给local_site的manage.py,
+从而拿到用户配置, 进行git pages部署. 而ship-cli则在上层控制执行权的转换以及目录的变更.
+<br/></p>
+<h2>主题集成</h2>
+<p>ship的主题集成是基于github的, 本质上就是一个git clone的工作.
+主题clone到themes目录下后, 将templates和static覆盖原有的templates和static,
+进行主题的更新. <br/></p>
+</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-footer">
+
+                        © 2016 Ship - Powered by <a href="https://github.com/neo1218/ship" target="_blank">Ship</a> - Author <a href="https://github.com/neo1218" target="_blank">neo1218</a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="/static/css/photoswipe.css" type="text/css">
+        <link rel="stylesheet" href="/static/css/default-skin.css" type="text/css">
+
+        <!-- Root element of PhotoSwipe. Must have class pswp. -->
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+            <!-- Background of PhotoSwipe.
+                It's a separate element as animating opacity is faster than rgba(). -->
+                <div class="pswp__bg"></div>
+
+                <!-- Slides wrapper with overflow:hidden. -->
+                <div class="pswp__scroll-wrap">
+
+                    <!-- Container that holds slides.
+                        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                        Don't modify these 3 pswp__item elements, data is added later on. -->
+                        <div class="pswp__container">
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                        </div>
+
+                        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+                        <div class="pswp__ui pswp__ui--hidden">
+
+                            <div class="pswp__top-bar">
+
+                                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                                <div class="pswp__counter"></div>
+
+                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                                <!-- element will get class pswp__preloader--active when preloader is running -->
+                                <div class="pswp__preloader">
+                                    <div class="pswp__preloader__icn">
+                                        <div class="pswp__preloader__cut">
+                                            <div class="pswp__preloader__donut"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                <div class="pswp__share-tooltip"></div>
+                            </div>
+
+                            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+                            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+                            <div class="pswp__caption">
+                                <div class="pswp__caption__center"></div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+
+        <script src="/static/js/photoswipe.js" type="text/javascript"></script>
+        <script src="/static/js/photoswipe-ui-default.js" type="text/javascript"></script>
+
+
+        <script src="/static/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+        <script src="/static/js/main.js" type="text/javascript"></script>
+
+    </body>
+</html>
