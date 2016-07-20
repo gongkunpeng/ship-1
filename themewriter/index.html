@@ -113,6 +113,22 @@
                             <div class="article-entry">
                                 <p>
     <h1>编写Ship主题</h1>
+<h2>1. 开始编写</h2>
+<p>ship提供了development site用于主题编写</p>
+<div class="codehilite"><pre>$ ship init --dev devsite
+</pre></div>
+
+
+<p>会在当前路径下生成devsite, 并初始化空的主题目录结构</p>
+<div class="codehilite"><pre>templates/ --&gt; index.html(default index)
+static/ --&gt; css/
+        --&gt; img/
+        --&gt; js/
+</pre></div>
+
+
+<p>templates存储html文件(jinja2模版), static则包含css, img, js:</p>
+<h2>2. 基础概念</h2>
 <h2>Jinja2模版</h2>
 <p>Ship主题使用Jinja2模版编写. Jinja2是一个简洁优雅的前端模版,</p>
 <div class="codehilite"><pre><span class="nt">&lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="nt">&lt;/title&gt;</span>
@@ -125,16 +141,6 @@
 
 
 <p>更多关于jinja2, 参见<a href="http://jinja.pocoo.org/docs/dev/">Jinja2文档</a>.</p>
-<h2>ship主题目录结构</h2>
-<p>ship主题的目录结构分为2大块: <strong>templates</strong> 和 <strong>static</strong>,
-templates存储html文件(jinja2模版), static则包含css, img, js:</p>
-<div class="codehilite"><pre>templates/ --&gt; index.html
-static/ --&gt; css/
-        --&gt; img/
-        --&gt; js/
-</pre></div>
-
-
 <h2>路由</h2>
 <p>ship默认定义了一些路由, 通过访问这些路由, 便可加载相应的html文件. 注意提供站内链接时,
 需要使用路由构造语法<code>url_for</code>, </p>
@@ -153,8 +159,8 @@ img
 </pre></div>
 
 
-<p>这样ship build的时候才可以顺藤摸瓜, 进行全站静态化.<br/>
-注: <code>&lt;type:param&gt;</code> <br/></p>
+<p>这样ship build的时候才可以"顺藤摸瓜", 进行全站静态化.<br/>
+注: <code>&lt;path:path&gt;</code>表示<code>type是path, 变量名是path</code>. 类同:<br/></p>
 <div class="codehilite"><pre>route                    | templates    | url_for                                 | desc
 -------------------------|--------------|-----------------------------------------|-------------
 /                        | index.html   | url_for(&#39;index&#39;)                        | 首页
@@ -166,8 +172,8 @@ img
 </pre></div>
 
 
-<h2>数据获取</h2>
-<h3>用户配置</h3>
+<h2>3. 数据获取</h2>
+<h3>获取用户配置</h3>
 <p>ship通过<code>user_config_dict</code>字典使每个路由对应的页面都可以获取用户配置,
 可以获取的配置项如下:</p>
 <div class="codehilite"><pre>&#39;ARTICLE_PER_PAGE&#39;: 平均每页文章数
@@ -192,10 +198,10 @@ img
 </pre></div>
 
 
-<p>注意, 在不同的路由中, 这些api是不同的: <br/>
+<p>注意, 在不同的路由中, 有些api是不同的: <br/>
 <strong><code>/</code></strong>:</p>
 <div class="codehilite"><pre>如果你开启了分页(ARTICLE_PER_PAGE != 0), 那么```latests```列表就是一个分页对象
-具有prev_num和next_num属性(具体见下面的分页)
+具有prev_num和next_num属性(具体见 其他场景::分页)
 </pre></div>
 
 
@@ -214,18 +220,16 @@ img
 </pre></div>
 
 
-<p><br/>
-在Jinja中使用<code>{{ ApiName }}</code>语法即可使用这些API.</p>
-<h3>文章相关</h3>
-<h4><strong>获取文章基本信息</strong></h4>
+<p><br></p>
+<h3><strong>获取文章基本信息</strong></h3>
 <p>你可以在Jinja中遍历文章列表, 获取单个文章:</p>
 <div class="codehilite"><pre>{% for post in latests %}
 {% endfor %}
 </pre></div>
 
 
-<p>文章的信息存储在文章的meta属性中:</p>
-<div class="codehilite"><pre><span class="cp">{%</span> <span class="k">for</span> <span class="nv">post</span> <span class="k">in</span> <span class="nv">latests</span> <span class="cp">%}</span><span class="x"></span>
+<p>文章的信息存储在文章的<strong>meta属性</strong>中:</p>
+<div class="codehilite"><pre><span class="cp">{%</span> <span class="k">for</span> <span class="nv">p</span> <span class="k">in</span> <span class="nv">latests</span> <span class="cp">%}</span><span class="x"></span>
 <span class="x">    标题: </span><span class="cp">{{</span> <span class="nv">p.meta</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
 <span class="x">    日期: </span><span class="cp">{{</span> <span class="nv">p.meta</span><span class="o">[</span><span class="s1">&#39;date&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
 <span class="x">    标签列表: </span><span class="cp">{{</span> <span class="nv">p.meta</span><span class="o">[</span><span class="s1">&#39;tags&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
@@ -234,8 +238,31 @@ img
 
 
 <p><code>{{ p.html | safe }}</code> 可以自动生成文章的html格式, 用于页面渲染.</p>
-<h4><strong>分页</strong></h4>
-<p>latests列表有<code>prev_num</code>和<code>next_num</code>属性, 可以使用如下方法进行分页</p>
+<h2>4. 代码示例</h2>
+<h3>1. 在主页显示所有标签, 每个标签链接到显示该标签对应文章的页面</h3>
+<p><code>index.html</code>:</p>
+<div class="codehilite"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;show-tags&#39;</span><span class="nt">&gt;</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">tag</span> <span class="k">in</span> <span class="nv">tags</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;tags&#39;</span><span class="o">,</span> <span class="nv">tag</span><span class="o">=</span><span class="nv">tag</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span><span class="cp">{{</span> <span class="nv">tag</span> <span class="cp">}}</span><span class="s">&lt;/a</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<h3>2. 在主页显示所有归档, 每个归档链接到显示该归档对应文章的页面</h3>
+<p><code>index.html</code>:</p>
+<div class="codehilite"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;show-archives&#39;</span><span class="nt">&gt;</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">archive</span> <span class="k">in</span> <span class="nv">archives</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;archives&#39;</span><span class="o">,</span> <span class="nv">archive</span><span class="o">=</span><span class="nv">archive</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span><span class="cp">{{</span> <span class="nv">archive</span> <span class="cp">}}</span><span class="s">&lt;/a</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<h2>5. 其他场景</h2>
+<h3><strong>分页</strong></h3>
+<p>每页的页数通过ARTICLE_PER_PAGE设置, 如果ARTICLE_PER_PAGE=0, 表示禁止分页. <br/>
+latests列表有<code>prev_num</code>和<code>next_num</code>属性, 可以使用如下方法进行分页</p>
 <div class="codehilite"><pre><span class="cp">{%</span> <span class="k">if</span> <span class="nv">latests.next_num</span> <span class="cp">%}</span>
     <span class="c">&lt;!-- 如果还有下一页 --&gt;</span>
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;index&#39;</span><span class="o">,</span> <span class="nv">page</span><span class="o">=</span><span class="nv">latests.next_num</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span>
@@ -250,9 +277,6 @@ img
     <span class="nt">&lt;/a&gt;</span>
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </pre></div>
-
-
-<p>每页的页数通过ARTICLE_PER_PAGE设置, 如果ARTICLE_PER_PAGE=0, 表示禁止分页.</p>
 </p>
                             </div>
                         </div>
