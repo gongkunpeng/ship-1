@@ -17,7 +17,7 @@ import datetime
 from functools import wraps
 
 from operators import _mkdir_p, _touch_file, _copy_files
-from templates import sails, md
+from templates import md, sails
 
 import logging
 from logging import StreamHandler, DEBUG
@@ -81,8 +81,9 @@ def cli():
 
 
 @click.command()
+@click.option('--dev', is_flag=True)
 @click.argument('site_name')
-def init(site_name):
+def init(dev, site_name):
     site = os.path.join(site_path, 'site')
     dst = os.path.join(os.getcwd(), site_name)
     
@@ -100,10 +101,12 @@ def init(site_name):
             dst_file = os.path.join(dst_dir, filename)
 
             shutil.copy(site_file, dst_file)
-    themes_path = os.path.join(dst, 'app/themes')
-    os.chdir(dst)
-    os.popen('git clone https://github.com/neo1218/ship-theme-cat.git app/themes/cat')
-    os.popen('ship upgrade cat')
+
+    if not dev:
+        themes_path = os.path.join(dst, 'app/themes')
+        os.chdir(dst)
+        os.popen('git clone https://github.com/neo1218/ship-theme-cat.git app/themes/cat')
+        os.popen('ship upgrade cat')
 
     finish_init_info()
     os.chdir(dst)
