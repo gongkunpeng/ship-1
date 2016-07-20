@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 import cli
 
 # version
-version = 0.13
+version = 0.14
 
 
 # entry_points
