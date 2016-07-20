@@ -2,7 +2,7 @@
 a python static site generator, shipping on [Frozen-Flask](http://pythonhosted.org/Frozen-Flask/)
 
 ## 📝 Document
-[ship document](https://neo1218.github.io/ship)
+[ship document](https://ship-orz.github.io/ship)
 
 ## ⬇️ Install
 Currently, you can get ship from source
