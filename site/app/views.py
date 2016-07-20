@@ -38,7 +38,7 @@ api_dict = {
         'posts_sum': len(posts),
         'latests': latests,
         'tags': [p.meta.get('tag') for p in latests],
-        'archive': {}.fromkeys(
+        'archives': {}.fromkeys(
                    [str(p.meta.get('date'))[:-3] for p in latests]).keys(), }
 """"""
 
