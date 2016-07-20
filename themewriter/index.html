@@ -168,7 +168,7 @@ img
 /archives/               | archives.html| url_for(&#39;archives&#39;)                     | 所有归档页面
 /archive/&lt;string:year&gt;/  | archive.html | url_for(&#39;archive&#39;, year=&lt;string:year&gt;)  | year归档对应的所有文章页面
 /tags/                   | tags.html    | url_for(&#39;tags&#39;)                         | 所有标签页面
-/tag/&lt;string:tag&gt;/       | tag.html     | url_for(&#39;tag&#39;, tag=&lt;string:tag&gt;)       | tag标签对应的所有文章页
+/tag/&lt;string:tag&gt;/       | tag.html     | url_for(&#39;tag&#39;, tag=&lt;string:tag&gt;)        | tag标签对应的所有文章页
 /about/                  | about.html   | url_for(&#39;about&#39;)                        | 关于页
 /static/&lt;filename&gt;/      | None         | url_for(&#39;static&#39;, filename=filename)    | 静态资源
 </pre></div>
@@ -187,6 +187,8 @@ img
 &#39;GITHUB_URL&#39;: github
 &#39;WEIBO_URL&#39;: 微博
 &#39;TWITTER_URL&#39;: twitter
+&#39;QQ&#39;: QQ
+&#39;EMAIL&#39;: Email
 </pre></div>
 
 
@@ -280,6 +282,37 @@ latests列表有<code>prev_num</code>和<code>next_num</code>属性, 可以使�
     <span class="nt">&lt;/a&gt;</span>
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </pre></div>
+
+
+<h3><strong>模版继承</strong></h3>
+<p>模版继承是Jinja2的一个有用的特性, 可以增强代码复用, 例如: <br/>
+<code>base.html</code> <br/></p>
+<div class="codehilite"><pre><span class="nt">&lt;html&gt;</span>    
+    <span class="nt">&lt;head&gt;</span> <span class="c">&lt;!-- head --&gt;</span> <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;show-posts&quot;</span><span class="nt">&gt;</span>
+            <span class="cp">{%</span> <span class="k">block</span> <span class="nv">posts</span> <span class="cp">%}</span>
+            <span class="c">&lt;!-- 其他页面重写部分 --&gt;</span>
+            <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+
+<p><code>index.html</code><br/></p>
+<div class="codehilite"><pre><span class="cp">{%</span> <span class="k">block</span> <span class="nv">posts</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">post</span> <span class="k">in</span> <span class="nv">latests</span> <span class="cp">%}</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;post-detail&#39;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.meta</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="nt">&lt;/div&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>这样可以避免重复编写页面框架代码, 简洁、优雅!</p>
+<h3><strong>集成评论</strong></h3>
+<p><strong>多说评论</strong> <br/></p>
+<p><strong>diqus评论</strong> <br/></p>
 </p>
                             </div>
                         </div>
