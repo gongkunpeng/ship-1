@@ -165,8 +165,10 @@ img
 -------------------------|--------------|-----------------------------------------|-------------
 /                        | index.html   | url_for(&#39;index&#39;)                        | 首页
 /&lt;path:path&gt;/            | post.html    | url_for(&#39;post&#39;, path=post.path)         | 每个文章页面
-/archieve/&lt;string:year&gt;/ | archive.html | url_for(&#39;archieve&#39;, year=&lt;string:year&gt;) | 归档页
-/tags/&lt;string:tag&gt;/      | tags.html    | url_for(&#39;tags&#39;, tag=&lt;string:tag&gt;)       | 标签页
+/archives/               | archives.html| url_for(&#39;archives&#39;)                     | 所有归档页面
+/archive/&lt;string:year&gt;/  | archive.html | url_for(&#39;archive&#39;, year=&lt;string:year&gt;)  | year归档对应的所有文章页面
+/tags/                   | tags.html    | url_for(&#39;tags&#39;)                         | 所有标签页面
+/tag/&lt;string:tag&gt;/       | tag.html     | url_for(&#39;tag&#39;, tag=&lt;string:tag&gt;)       | tag标签对应的所有文章页
 /about/                  | about.html   | url_for(&#39;about&#39;)                        | 关于页
 /static/&lt;filename&gt;/      | None         | url_for(&#39;static&#39;, filename=filename)    | 静态资源
 </pre></div>
@@ -181,6 +183,7 @@ img
 &#39;SITE_URL&#39;: 站点url
 &#39;SITE_DESC&#39;: 站点描述
 &#39;SITE_OWNER&#39;: 站点作者
+&#39;SITE_KEYWORDS&#39;: 站点关键字
 &#39;GITHUB_URL&#39;: github
 &#39;WEIBO_URL&#39;: 微博
 &#39;TWITTER_URL&#39;: twitter
@@ -210,7 +213,7 @@ img
 </pre></div>
 
 
-<p><strong><code>/archieve/&lt;string:year&gt;/</code></strong></p>
+<p><strong><code>/archive/&lt;string:year&gt;/</code></strong></p>
 <div class="codehilite"><pre>归档页中的```posts```是根据year归档后的文章列表
 </pre></div>
 
@@ -239,21 +242,21 @@ img
 
 <p><code>{{ p.html | safe }}</code> 可以自动生成文章的html格式, 用于页面渲染.</p>
 <h2>4. 代码示例</h2>
-<h3>1. 在主页显示所有标签, 每个标签链接到显示该标签对应文章的页面</h3>
+<h3>1. 在主页显示所有标签, 每个标签链接到该标签对应所有文章的页面</h3>
 <p><code>index.html</code>:</p>
 <div class="codehilite"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;show-tags&#39;</span><span class="nt">&gt;</span>
     <span class="cp">{%</span> <span class="k">for</span> <span class="nv">tag</span> <span class="k">in</span> <span class="nv">tags</span> <span class="cp">%}</span>
-        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;tags&#39;</span><span class="o">,</span> <span class="nv">tag</span><span class="o">=</span><span class="nv">tag</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span><span class="cp">{{</span> <span class="nv">tag</span> <span class="cp">}}</span><span class="s">&lt;/a</span><span class="nt">&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;tag&#39;</span><span class="o">,</span> <span class="nv">tag</span><span class="o">=</span><span class="nv">tag</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span><span class="cp">{{</span> <span class="nv">tag</span> <span class="cp">}}</span><span class="s">&lt;/a</span><span class="nt">&gt;&lt;/li&gt;</span>
     <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 
 
-<h3>2. 在主页显示所有归档, 每个归档链接到显示该归档对应文章的页面</h3>
+<h3>2. 在主页显示所有归档, 每个归档链接到该归档对应所有文章的页面</h3>
 <p><code>index.html</code>:</p>
 <div class="codehilite"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;show-archives&#39;</span><span class="nt">&gt;</span>
     <span class="cp">{%</span> <span class="k">for</span> <span class="nv">archive</span> <span class="k">in</span> <span class="nv">archives</span> <span class="cp">%}</span>
-        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;archives&#39;</span><span class="o">,</span> <span class="nv">archive</span><span class="o">=</span><span class="nv">archive</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span><span class="cp">{{</span> <span class="nv">archive</span> <span class="cp">}}</span><span class="s">&lt;/a</span><span class="nt">&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;archive&#39;</span><span class="o">,</span> <span class="nv">archive</span><span class="o">=</span><span class="nv">archive</span><span class="o">)</span> <span class="cp">}}</span><span class="err">&gt;</span><span class="cp">{{</span> <span class="nv">archive</span> <span class="cp">}}</span><span class="s">&lt;/a</span><span class="nt">&gt;&lt;/li&gt;</span>
     <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
