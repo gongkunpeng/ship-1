@@ -22,6 +22,7 @@ class ExampleConfig(Config):
     SITE_URL = "https://neo1218.github.io"
     SITE_DESC = "a ship site"
     SITE_OWNER = "neo1218"
+    SITE_KEYWORDS = "ship neo1218"
 
     # [article setting]
     ARTICLE_Type = FLATPAGES_EXTENSION = '.md'  # default is .md
@@ -44,6 +45,7 @@ class MyConfig(Config):
     SITE_URL = ""
     SITE_DESC = ""
     SITE_OWNER = ""
+    SITE_KEYWORDS = ""
 
     # [article setting]
     ARTICLE_TYPE = FLATPAGES_EXTENSION = ".md"
