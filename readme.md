@@ -13,7 +13,7 @@ Currently, you can get ship from source
 When ship is stable, I will register it to pypi:)
 
 ## 🚢 Set-Sail
-### $ ship init site
+### $ ship init (--dev)
 
 ### $ ship server
 
