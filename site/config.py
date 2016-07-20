@@ -32,6 +32,8 @@ class ExampleConfig(Config):
     GITHUB_URL = "https://github.com/neo1218"
     WEIBO_URL = "http://www.weibo.com/5551886705/profile"
     TWITTER_URl = "https://twitter.com/neo1218substack"
+    QQ_URL = "834597629"
+    EMAIL = "neo1218@yeah.net"
 
     # [deploy on github/(git) pages]
     GIT_URL = "https://github.com/neo1218/ship"
@@ -55,6 +57,8 @@ class MyConfig(Config):
     GITHUB_URL = ""
     WEIBO_URL = ""
     TWITTER_URl = ""
+    QQ_URL = ""
+    EMAIL = ""
 
     # [deploy on github/(git) pages]
     GIT_URL = ""

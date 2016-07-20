@@ -62,18 +62,28 @@ def post(path):
     return render_template('post.html', **dict(user_config_dict, **api_dict))
 
 
-@app.route('/archieve/<string:year>/')
-def archieve(year):
+@app.route('/archive/<string:year>/')
+def archive(year):
     posts = [p for p in pages if year in \
             str(p.meta.get('date')[-3])]
     api_dict['posts'] = posts
     return render_template('archive.html', **dict(user_config_dict, **api_dict))
 
 
-@app.route('/tags/<string:tag>/')
-def tags(tag):
+@app.route('/archives/')
+def archives():
+    return render_template('archives.html', **dict(user_config_dict, **api_dict))
+
+
+@app.route('/tag/<string:tag>/')
+def tag(tag):
     posts = [p for p in pages if tag in p.meta.get('tags', [])]
     api_dict['posts'] = posts
+    return render_template('tag.html', **dict(user_config_dict, **api_dict))
+
+
+@app.route('/tags/')
+def tags():
     return render_template('tags.html', **dict(user_config_dict, **api_dict))
 
 
