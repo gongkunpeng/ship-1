@@ -26,7 +26,7 @@ When ship is stable, I will register it to pypi:)
 ### $ ship upgrade
 
 ## ⬅️ Todo
-+ [ ] ship status
++ [x] ship status
 + [x] a simple way to config & upgrade themes
 + [x] Separate theme from site
 

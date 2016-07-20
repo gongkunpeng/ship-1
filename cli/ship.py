@@ -193,15 +193,9 @@ def upgrade(theme_name):
                 ''' % theme_name)
 
 
-@click.command()
-def status():
-    pass
-
-
 cli.add_command(init)
 cli.add_command(server)
 cli.add_command(build)
 cli.add_command(new)
 cli.add_command(upload)
 cli.add_command(upgrade)
-cli.add_command(status)
