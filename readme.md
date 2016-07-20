@@ -25,6 +25,9 @@ When ship is stable, I will register it to pypi:)
 
 ### $ ship upgrade
 
+## 🐼 Themes
++ [Ship-Themes](https://github.com/Ship-Orz/ship-themes)
+
 ## ⬅️ Todo
 + [x] ship status
 + [x] a simple way to config & upgrade themes
